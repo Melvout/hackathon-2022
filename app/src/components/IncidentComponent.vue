@@ -51,6 +51,9 @@
           <v-btn :disabled="!valid" color="info" class="mr-4" @click="validate">
             Validate
           </v-btn>
+          <v-btn color="secondary" class="mr-4" @click="clickOutside">
+            Cancel
+          </v-btn>
         </v-form>
       </v-card>
     </v-dialog>
@@ -150,7 +153,7 @@ export default {
 
 <style scoped>
 #formCard {
-  padding: 10px;
+  padding: 20px;
   width: 60vw;
   min-width: 600px;
   margin: auto;
