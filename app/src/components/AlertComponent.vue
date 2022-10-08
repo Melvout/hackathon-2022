@@ -7,7 +7,6 @@
           <th class="text-left">Cause</th>
           <th class="text-left">State</th>
           <th class="text-left">Date</th>
-
           <th class="text-left">Required action</th>
         </tr>
       </thead>
@@ -27,7 +26,6 @@
         </tr>
       </tbody>
     </v-table>
-
   </v-container>
 </template>
   
