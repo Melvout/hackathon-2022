@@ -8,7 +8,12 @@
       type="success"
       density="compact"
     ></v-alert>
-    <v-dialog id="modal" v-model="dialog" v-on:click:outside="clickOutside">
+    <v-dialog
+      id="modal"
+      v-model="dialog"
+      v-on:click:outside="clickOutside"
+      width="unset"
+    >
       <template v-slot:activator="{ props }">
         <v-btn color="info" v-bind="props"
           ><v-icon icon="mdi-plus-box" />New modification request</v-btn
