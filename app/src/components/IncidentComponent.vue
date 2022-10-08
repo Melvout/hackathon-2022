@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <h3>Déclarer un incident</h3>
+    <h3>Déclarer un changement</h3>
 
-    <v-form ref="form" v-model="valid" lazy-validation>
+    <v-form id="form" v-model="valid" lazy-validation>
 
       <v-select
         v-model="selectedOrder"
@@ -23,14 +23,14 @@
       <v-text-field
       v-model="date"
       type="datetime-local"
-      label="Date"
+      label="Nouvelle date de livraison (si nécessaire)"
       required
     ></v-text-field>
 
     <v-text-field
       v-model="address"
       type="address"
-      label="Adresse"
+      label="Nouvelle adresse de livraison (si nécessaire)"
       required
     ></v-text-field>
 
@@ -77,4 +77,7 @@ export default {
 </script>
   
 <style scoped>
+#form {
+  padding: 10px;
+}
 </style>
