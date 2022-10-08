@@ -1,8 +1,5 @@
 <template>
   <v-container>
-    <v-btn color="primary" id="settingsBtn"
-      ><v-icon icon="mdi-message-settings" /> Notifications settings</v-btn
-    >
     <br />
     <v-table fixed-header height="300px">
       <thead>
