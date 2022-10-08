@@ -1,83 +1,158 @@
 <template>
   <v-container>
-    <h3>Déclarer un changement</h3>
+    <v-alert
+      id="alert"
+      v-if="displaySaveAlert"
+      icon="mdi-content-save"
+      title="Demande enregistrée"
+      type="success"
+      density="compact"
+    ></v-alert>
+    <v-dialog id="modal" v-model="dialog" v-on:click:outside="clickOutside">
+      <template v-slot:activator="{ props }">
+        <v-btn color="info" v-bind="props"
+          ><v-icon icon="mdi-plus-box" />New modification request</v-btn
+        >
+      </template>
+      <v-card id="formCard">
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-select
+            v-model="selectedOrder"
+            :items="orders"
+            :rules="[(v) => !!v || 'Order number needed']"
+            label="Order number"
+            required
+          ></v-select>
 
-    <v-form id="form" v-model="valid" lazy-validation>
+          <v-select
+            v-model="selectedType"
+            :items="issueTypes"
+            :rules="[(v) => !!v || 'Modification type required']"
+            label="Modification type"
+            required
+          ></v-select>
 
-      <v-select
-        v-model="selectedOrder"
-        :items="orders"
-        :rules="[(v) => !!v || 'Numéro de commande requis.']"
-        label="Numéro de commande"
-        required
-      ></v-select>
+          <v-text-field
+            v-model="date"
+            type="datetime-local"
+            label="New delivery date (fill if needed)"
+            required
+          ></v-text-field>
 
-      <v-select
-        v-model="selectedType"
-        :items="issueTypes"
-        :rules="[(v) => !!v || 'Type de modification requis.']"
-        label="Type de modification"
-        required
-      ></v-select>
+          <v-text-field
+            v-model="address"
+            type="address"
+            label="New delivery location (fill if needed)"
+            required
+          ></v-text-field>
 
-      <v-text-field
-      v-model="date"
-      type="datetime-local"
-      label="Nouvelle date de livraison (si nécessaire)"
-      required
-    ></v-text-field>
+          <v-textarea v-model="comment" label="Comment"></v-textarea>
 
-    <v-text-field
-      v-model="address"
-      type="address"
-      label="Nouvelle adresse de livraison (si nécessaire)"
-      required
-    ></v-text-field>
+          <v-btn :disabled="!valid" color="info" class="mr-4" @click="validate">
+            Validate
+          </v-btn>
+        </v-form>
+      </v-card>
+    </v-dialog>
 
-    <v-textarea
-    v-model="comment"
-    label="Commentaire"
-    ></v-textarea>
+    <br />
 
-      
-      <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
-        Validate
-      </v-btn>
-
-    </v-form>
-  
+    <v-table>
+      <thead>
+        <tr>
+          <th class="text-left">Order number</th>
+          <th class="text-left">Modification type</th>
+          <th class="text-left">New address</th>
+          <th class="text-left">New date</th>
+          <th class="text-left">Comment</th>
+          <th class="text-left">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in demands" :key="item.name">
+          <td>{{ item.order }}</td>
+          <td>{{ item.type }}</td>
+          <td>{{ item.address }}</td>
+          <td>{{ item.date }}</td>
+          <td>{{ item.comments }}</td>
+          <td>{{ item.status }}</td>
+        </tr>
+      </tbody>
+    </v-table>
   </v-container>
 </template>
-  
-<script>
 
+<script>
 export default {
   name: "IncidentComponent",
 
   data: () => ({
     valid: true,
+    dialog: false,
 
     selectedOrder: null,
     orders: ["124897520167", "124897520103", "12489752018", "124897520146"],
 
     selectedType: null,
-    issueTypes: ["Changement de coordonnées (date, heure, adresse...)", "Autres (précisez en commentaire)"],
+    issueTypes: [
+      "Change delivery information (date, hour, address...)",
+      "Change products and/or amounts",
+      "Other (Use comments field to develop)",
+    ],
 
     date: null,
     address: null,
     comment: null,
+    displaySaveAlert: false,
+    demands: [
+      {
+        order: 124897520103,
+        type: "Change delivery information",
+        address: "Quinta do Anabique, 2625-090 Póvoa de Santa Iria",
+        date: "10/10/2022 14:00",
+        comments:
+          "Stock currently full, asking to delay the delivery by 2 days",
+        status: "Pending",
+      },
+      {
+        order: 124897520167,
+        type: "Other",
+        date: "24/10/2022 10:00",
+        comments: "Can't be here on original date, I have aqua-poney",
+        status: "Approved",
+      },
+    ],
   }),
 
   methods: {
     validate() {
       this.$refs.form.validate();
+      this.demands.push({
+        order: this.selectedOrder,
+        date: this.date,
+        type: this.selectedType,
+        address: this.address,
+        comments: this.comment,
+        status: "Pending",
+      });
+      this.displaySaveAlert = true;
+      setTimeout(() => (this.displaySaveAlert = false), 2000);
+      this.dialog = false;
+      this.$refs.form.reset();
+    },
+    clickOutside() {
+      this.$refs.form.reset();
+      this.dialog = false;
     },
   },
 };
 </script>
-  
+
 <style scoped>
-#form {
+#formCard {
   padding: 10px;
+}
+#alert {
+  margin: 5px 0;
 }
 </style>
