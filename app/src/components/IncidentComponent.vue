@@ -151,6 +151,9 @@ export default {
 <style scoped>
 #formCard {
   padding: 10px;
+  width: 60vw;
+  min-width: 600px;
+  margin: auto;
 }
 #alert {
   margin: 5px 0;

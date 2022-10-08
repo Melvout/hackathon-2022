@@ -11,18 +11,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="order in orders" :key="order.id">
-          <td>{{ order.id }}</td>
-          <td>{{ order.cause }}</td>
-          <td>{{ order.state }}</td>
-          <td>{{ order.date }}</td>
-          <td v-if="order.requiredAction == 0">Action 1</td>
-          <td v-else-if="order.requiredAction == 1">
+        <tr v-for="alertOnOrder in alertOnOrdersData" :key="alertOnOrder.id">
+          <td>{{ alertOnOrder.id }}</td>
+          <td>{{ alertOnOrder.cause }}</td>
+          <td>{{ alertOnOrder.state }}</td>
+          <td>{{ alertOnOrder.date }}</td>
+          <td v-if="alertOnOrder.requiredAction == 0">Action 1</td>
+          <td v-else-if="alertOnOrder.requiredAction == 1">
             <v-btn icon size="25" @click="showAlert()">
               <v-icon size="20">mdi-exclamation</v-icon>
             </v-btn>
           </td>
-          <td v-else-if="order.requiredAction == 2">Action 3</td>
+          <td v-else-if="alertOnOrder.requiredAction == 2">Action 3</td>
         </tr>
       </tbody>
     </v-table>
@@ -30,12 +30,12 @@
 </template>
 
 <script>
-import ordersData from "@/resources/orders.json";
+import alertOnOrdersData from "@/resources/alertOnOrders.json";
 export default {
   name: "AlertComponent",
 
   data: () => ({
-    orders: ordersData,
+    alertOnOrdersData: alertOnOrdersData,
   }),
   methods: {
     showAlert: () => {
