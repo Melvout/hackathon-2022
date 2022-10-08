@@ -3,7 +3,7 @@
     <v-main>
       <v-app-bar id="navBar">
         <v-btn @click="alertPage = false">Modification</v-btn>
-        <v-btn @click="alertPage = true">Mes alertes</v-btn>
+        <v-btn @click="alertPage = true">My alerts</v-btn>
       </v-app-bar>
       <AlertComponent v-if="alertPage" />
       <IncidentComponent v-else />

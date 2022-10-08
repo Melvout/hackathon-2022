@@ -5,7 +5,7 @@
         <tr>
           <th class="text-left">Order</th>
           <th class="text-left">Cause</th>
-          <th class="text-left">State</th>
+          <th class="text-left">Status</th>
           <th class="text-left">Date</th>
           <th class="text-left">Required action</th>
         </tr>
@@ -28,8 +28,8 @@
     </v-table>
   </v-container>
 </template>
-  
-  <script>
+
+<script>
 import ordersData from "@/resources/orders.json";
 export default {
   name: "AlertComponent",
