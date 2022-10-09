@@ -2,6 +2,12 @@
   <v-app>
     <v-main>
       <v-app-bar id="navBar">
+        <v-img
+          :src="require('./assets/stef_logo.jpg')"
+          max-height="64"
+          max-width="128"
+          contain
+        ></v-img>
         <v-btn @click="showPage('modifPage')"
           ><v-icon icon="mdi-pencil"></v-icon> Modification</v-btn
         >
@@ -72,5 +78,8 @@ export default {
 }
 .v-icon {
   margin-right: 5px;
+}
+.v-img {
+  border: 1px solid #005aaa;
 }
 </style>
