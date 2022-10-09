@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <br />
     <v-table fixed-header height="300px">
       <thead>
         <tr>
@@ -19,9 +18,15 @@
           <td>{{ alertOnOrder.date }}</td>
           <td v-if="alertOnOrder.requiredAction == 0">Action 1</td>
           <td v-else-if="alertOnOrder.requiredAction == 1">
-            <v-btn icon size="25" @click="showAlert()">
-              <v-icon size="20">mdi-exclamation</v-icon>
-            </v-btn>
+            <v-dialog id="modal" v-model="dialog" width="unset">
+              <template v-slot:activator="{ props }">
+                <v-btn icon size="25" v-bind="props">
+                  <v-icon size="20">mdi-exclamation</v-icon>
+                </v-btn>
+              </template>
+
+              <ProposalsComponent></ProposalsComponent>
+            </v-dialog>
           </td>
           <td v-else-if="alertOnOrder.requiredAction == 2">Action 3</td>
         </tr>
@@ -31,17 +36,22 @@
 </template>
 
 <script>
+import ProposalsComponent from "@/components/ProposalsComponent.vue";
 import alertOnOrdersData from "@/resources/alertOnOrders.json";
 export default {
   name: "AlertComponent",
-
   data: () => ({
     alertOnOrdersData: alertOnOrdersData,
+    dialog: false,
   }),
   methods: {
     showAlert: () => {
       alert("OK");
     },
+    clickOutside() {
+      this.dialog = false;
+    },
   },
+  components: { ProposalsComponent },
 };
 </script>
