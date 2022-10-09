@@ -14,15 +14,12 @@
         <v-btn @click="showPage('alertPage')"
           ><v-icon icon="mdi-database"></v-icon> My alerts</v-btn
         >
-        <v-btn @click="showPage('settingsPage')"
+        <v-btn
+          style="position: absolute; right: 0"
+          @click="showPage('settingsPage')"
           ><v-icon icon="mdi-account-cog"></v-icon> Notifications
           settings</v-btn
         >
-        <v-icon
-          icon="mdi-account-box-outline"
-          size="large"
-          style="position: absolute; right: 0; color: white"
-        ></v-icon>
       </v-app-bar>
       <AlertComponent v-if="alertPage" />
       <IncidentComponent v-else-if="modifPage" />

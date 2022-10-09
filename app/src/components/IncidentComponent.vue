@@ -15,7 +15,10 @@
       width="unset"
     >
       <template v-slot:activator="{ props }">
-        <v-btn color="info" v-bind="props"
+        <v-btn
+          color="info"
+          v-bind="props"
+          style="margin-left: 20px; margin-top: 25px; margin-bottom: 25px"
           ><v-icon icon="mdi-plus-box" />New modification request</v-btn
         >
       </template>
@@ -145,7 +148,7 @@ export default {
   methods: {
     validate() {
       this.$refs.form.validate();
-      this.demands.push({
+      this.demands.unshift({
         order: this.selectedOrder,
         date: this.date,
         type: this.selectedType,
@@ -157,6 +160,8 @@ export default {
       setTimeout(() => (this.displaySaveAlert = false), 2000);
       this.dialog = false;
       this.$refs.form.reset();
+
+      setTimeout(() => (this.demands[0].status = "Approved"), 10000);
     },
     clickOutside() {
       this.$refs.form.reset();
@@ -187,8 +192,5 @@ export default {
 }
 #alert {
   margin: 5px 0;
-}
-.v-icon {
-  margin-right: 5px;
 }
 </style>
