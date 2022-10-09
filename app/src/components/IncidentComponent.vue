@@ -83,7 +83,9 @@
           <td>{{ item.address }}</td>
           <td>{{ item.date }}</td>
           <td>{{ item.comments }}</td>
-          <td>{{ item.status }}</td>
+          <td v-bind:style="{ color: getStatusColor(item) }">
+            {{ item.status }}
+          </td>
         </tr>
       </tbody>
     </v-table>
@@ -129,6 +131,12 @@ export default {
         comments: "Can't be here on original date, I have aqua-poney",
         status: "Approved",
       },
+      {
+        order: 12489752018,
+        type: "Change products and/or amounts",
+        date: "12/10/2022 12:00",
+        status: "Rejected",
+      },
     ],
   }),
 
@@ -151,6 +159,18 @@ export default {
     clickOutside() {
       this.$refs.form.reset();
       this.dialog = false;
+    },
+    getStatusColor(item) {
+      switch (item.status) {
+        case "Pending":
+          return "orange";
+        case "Approved":
+          return "green";
+        case "Rejected":
+          return "red";
+        default:
+          return "black";
+      }
     },
   },
 };

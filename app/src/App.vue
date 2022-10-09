@@ -12,6 +12,11 @@
           ><v-icon icon="mdi-account-cog"></v-icon> Notifications
           settings</v-btn
         >
+        <v-icon
+          icon="mdi-account-box-outline"
+          size="large"
+          style="position: absolute; right: 0; color: white"
+        ></v-icon>
       </v-app-bar>
       <AlertComponent v-if="alertPage" />
       <IncidentComponent v-else-if="modifPage" />
