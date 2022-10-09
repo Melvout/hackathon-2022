@@ -72,8 +72,8 @@
           <th class="text-left">Modification type</th>
           <th class="text-left">New address</th>
           <th class="text-left">New date</th>
-          <th class="text-left">Comment</th>
           <th class="text-left">Status</th>
+          <th class="text-left">Comment</th>
         </tr>
       </thead>
       <tbody>
@@ -82,10 +82,10 @@
           <td>{{ item.type }}</td>
           <td>{{ item.address }}</td>
           <td>{{ item.date }}</td>
-          <td>{{ item.comments }}</td>
           <td v-bind:style="{ color: getStatusColor(item) }">
             {{ item.status }}
           </td>
+          <td>{{ item.comments }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -128,12 +128,14 @@ export default {
         order: 124897520167,
         type: "Other",
         date: "24/10/2022 10:00",
+        address: "Quinta do Anabique, 2625-090 Póvoa de Santa Iria",
         comments: "Can't be here on original date, I have aqua-poney",
         status: "Approved",
       },
       {
         order: 12489752018,
         type: "Change products and/or amounts",
+        address: "Quinta do Anabique, 2625-090 Póvoa de Santa Iria",
         date: "12/10/2022 12:00",
         status: "Rejected",
       },

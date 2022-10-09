@@ -1,8 +1,9 @@
 <template>
   <v-container>
-    <h3>To receive my notifications</h3>
     <br />
     <v-card id="formCard">
+      <h3>To receive my notifications</h3>
+      <br />
       <v-form ref="form" v-model="valid" lazy-validation>
         <v-select
           v-model="selectedType"
@@ -40,5 +41,7 @@ export default {
 <style>
 #formCard {
   padding: 10px;
+  width: 1000px;
+  margin: auto;
 }
 </style>
