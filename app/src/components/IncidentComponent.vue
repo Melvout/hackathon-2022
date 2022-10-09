@@ -166,4 +166,7 @@ export default {
 #alert {
   margin: 5px 0;
 }
+.v-icon {
+  margin-right: 5px;
+}
 </style>

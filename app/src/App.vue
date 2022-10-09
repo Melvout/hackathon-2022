@@ -2,9 +2,16 @@
   <v-app>
     <v-main>
       <v-app-bar id="navBar">
-        <v-btn @click="showPage('modifPage')">Modification</v-btn>
-        <v-btn @click="showPage('alertPage')">My alerts</v-btn>
-        <v-btn @click="showPage('settingsPage')">Notifications settings</v-btn>
+        <v-btn @click="showPage('modifPage')"
+          ><v-icon icon="mdi-pencil"></v-icon> Modification</v-btn
+        >
+        <v-btn @click="showPage('alertPage')"
+          ><v-icon icon="mdi-database"></v-icon> My alerts</v-btn
+        >
+        <v-btn @click="showPage('settingsPage')"
+          ><v-icon icon="mdi-account-cog"></v-icon> Notifications
+          settings</v-btn
+        >
       </v-app-bar>
       <AlertComponent v-if="alertPage" />
       <IncidentComponent v-else-if="modifPage" />
@@ -57,5 +64,8 @@ export default {
 }
 .v-btn {
   color: white;
+}
+.v-icon {
+  margin-right: 5px;
 }
 </style>
