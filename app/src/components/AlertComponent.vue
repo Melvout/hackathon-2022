@@ -11,7 +11,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="alertOnOrder in alertOnOrdersData" :key="alertOnOrder.id">
+        <tr
+          v-for="(alertOnOrder, index) in alertOnOrdersData"
+          :key="alertOnOrder.id"
+        >
           <td>{{ alertOnOrder.id }}</td>
           <td>{{ alertOnOrder.cause }}</td>
           <td>{{ alertOnOrder.state }}</td>
@@ -25,7 +28,13 @@
                 </v-btn>
               </template>
 
-              <ProposalsComponent></ProposalsComponent>
+              <ProposalsComponent
+                @proposals-component:close-dialog="clickOutside()"
+                @proposals-component:validate-modification="
+                  validateModification($event[0])
+                "
+                :alertId="index"
+              ></ProposalsComponent>
             </v-dialog>
           </td>
           <td v-else-if="alertOnOrder.requiredAction == 2">Action 3</td>
@@ -41,15 +50,16 @@ import alertOnOrdersData from "@/resources/alertOnOrders.json";
 export default {
   name: "AlertComponent",
   data: () => ({
+    index: null,
     alertOnOrdersData: alertOnOrdersData,
     dialog: false,
   }),
   methods: {
-    showAlert: () => {
-      alert("OK");
-    },
     clickOutside() {
       this.dialog = false;
+    },
+    validateModification(alertId) {
+      this.alertOnOrdersData[alertId].state = "Done";
     },
   },
   components: { ProposalsComponent },
