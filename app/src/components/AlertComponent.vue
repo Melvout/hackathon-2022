@@ -1,15 +1,23 @@
 <template>
   <v-container>
-    <v-table fixed-header height="300px" style="overflow: hidden">
+    <v-alert
+      id="alert"
+      v-if="displaySaveAlert"
+      icon="mdi-content-save"
+      title="Answer sent"
+      type="success"
+      density="compact"
+    ></v-alert>
+
+    <v-table fixed-header style="overflow: hidden">
       <thead>
         <tr>
           <th class="text-left">Order</th>
           <th class="text-left">Cause</th>
           <th class="text-left">Date</th>
-          <th class="th-center"></th>
+          <th class="text-left">Actions</th>
         </tr>
       </thead>
-
       <tbody>
         <transition-group
           name="custom-classes-transition"
@@ -19,11 +27,12 @@
           <tr
             v-for="(alertOnOrder, index) in alertOnOrdersData"
             :key="alertOnOrder.id"
+            style="height: 100px"
           >
             <td>{{ alertOnOrder.id }}</td>
             <td>{{ alertOnOrder.cause }}</td>
             <td>{{ alertOnOrder.date }}</td>
-            <td class="td-center" v-if="alertOnOrder.requiredAction == 0">
+            <td v-if="alertOnOrder.requiredAction == 0">
               <v-btn icon size="25" @click="validateModification(index)">
                 <v-icon size="20">mdi-check</v-icon>
               </v-btn>
@@ -42,6 +51,7 @@
                     validateModification($event[0])
                   "
                   :alertId="index"
+                  :orderNumber="alertOnOrder.id"
                 ></ProposalsComponent>
               </v-dialog>
             </td>
@@ -63,6 +73,7 @@ import alertOnOrdersData from "@/resources/alertOnOrders.json";
 export default {
   name: "AlertComponent",
   data: () => ({
+    displaySaveAlert: false,
     index: null,
     alertOnOrdersData: alertOnOrdersData,
     dialog: false,
@@ -72,8 +83,9 @@ export default {
       this.dialog = false;
     },
     validateModification(alertId) {
-      this.alertOnOrdersData[alertId].state = "Done";
       this.alertOnOrdersData.splice(alertId, 1);
+      this.displaySaveAlert = true;
+      setTimeout(() => (this.displaySaveAlert = false), 2000);
     },
   },
   components: { ProposalsComponent },
@@ -88,10 +100,7 @@ export default {
 <style scoped>
 @import url("https://cdn.jsdelivr.net/npm/animate.css@3.5.1");
 
-.th-center,
-.td-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#alert {
+  margin: 5px 0;
 }
 </style>>

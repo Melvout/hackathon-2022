@@ -4,7 +4,7 @@
       id="alert"
       v-if="displaySaveAlert"
       icon="mdi-content-save"
-      title="Demande enregistrée"
+      title="Request saved"
       type="success"
       density="compact"
     ></v-alert>

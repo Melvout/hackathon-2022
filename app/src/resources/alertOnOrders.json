@@ -2,22 +2,25 @@
   {
     "id": "124897520146",
     "cause": "Delay",
-    "state": "Processing",
     "date": "09/10/2022",
     "requiredAction": 0
   },
   {
     "id": "124897520118",
     "cause": "Banana",
-    "state": "Processing",
     "date": "08/10/2022",
     "requiredAction": 1
   },
   {
     "id": "124897520194",
     "cause": "Poney",
-    "state": "Done",
     "date": "08/10/2022",
     "requiredAction": 2
+  },
+  {
+    "id": "124897520194",
+    "cause": "Delay",
+    "date": "08/10/2022",
+    "requiredAction": 1
   }
 ]

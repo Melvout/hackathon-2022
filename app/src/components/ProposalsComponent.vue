@@ -2,7 +2,7 @@
   <v-container>
     <v-card id="modal">
       <v-form v-model="valid">
-        <h3>Suggestions for the order n°{{ this.alertId }}</h3>
+        <h3>Suggestions for the order n°{{ this.orderNumber }}</h3>
 
         <br />
 
@@ -31,7 +31,7 @@
 export default {
   name: "ProposalsComponent",
 
-  props: ["alertId"],
+  props: ["alertId", "orderNumber"],
 
   data: () => ({
     valid: false,
