@@ -77,7 +77,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in demands" :key="item.name">
+        <tr v-for="item in demands" :key="item.name" style="height: 100px">
           <td>{{ item.order }}</td>
           <td>{{ item.type }}</td>
           <td>{{ item.address }}</td>
